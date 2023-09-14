@@ -5,6 +5,12 @@
   
   DESCRIPTION:
   Enter sketch overview here...
+
+  NOTES ON WORKING WITH ARDUINO CLOUD
+  1. Try to avoid delay(); it messes with the arduino looking for the wifi connection.
+  2. All arduinos should have the basic wifi code and an IP address; connect via USB and check the serial monitor to get the IP address.
+  3. The LED_BUILTIN will be lit when the initial wifi connection is established and the IP is good; the LED_BUILTIN is NOT a connection status light though; we need it for testing and other purposes.
+  
   
 */
 #include <SPI.h>
@@ -88,7 +94,25 @@ void setup() {
 
   printWifiStatus();                        // you're connected now, so print out the status
 
-
+  // Check if IP is ok
+  IPAddress ip = WiFi.localIP();
+  // Print it in the serial monitor for debugging
+  Serial.print("Checking IP Address and turning on led builtin if it's ok: ");
+  Serial.println(ip);
+  // Then turn on LED_BUILTIN if IP is ok
+  // The IP is an array with 4 numbers
+  // The local ip will always be something like 192.168.2.XX
+  // THIS ARDUINO'S IP SHOULD BE 192.168.2.36, so
+  // ip[0] == 192 should be true
+  // ip[1] == 168 should be true
+  // ip[2] ==   2 should be true
+  // ip[3] ==  36 should be true
+  if (ip[3] == 36) {
+    digitalWrite(LED_BUILTIN, HIGH);
+  } else {
+    // Turn LED on if the IP isn't right.
+    digitalWrite(LED_BUILTIN, LOW);
+  }
 
   
   /*
