@@ -10,6 +10,8 @@
   1. Try to avoid delay(); it messes with the arduino looking for the wifi connection.
   2. All arduinos should have the basic wifi code and an IP address; connect via USB and check the serial monitor to get the IP address.
   3. The LED_BUILTIN will be lit when the initial wifi connection is established and the IP is good; the LED_BUILTIN is NOT a connection status light though; we need it for testing and other purposes.
+  4. If the Arduino Over-The-Air port doesn't show up in the Arduino web editor, push the reset button on the arduino and the Over-The-Air port option should show up within 30-60 seconds.
+  5. After a successful over-the-air update, the Over-The-Air port should show up within 30-60 seconds. See #4 if it doesn't.
   
   
 */
